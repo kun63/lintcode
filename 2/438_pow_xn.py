@@ -4,7 +4,7 @@ class Solution:
     @param n {int}: the power number
     @return {float}: the result
     """
-    def myPow(self, x, n):
+    def _myPow(self, x, n):
         # write your code here
         if n == 0:
             return 1
@@ -13,9 +13,6 @@ class Solution:
             i += 1
             n = n//2
         k = n
-        # print(i,k)
-
-        # print(k)
         temp_k = 0
         if k < 0:
             temp_k = k
@@ -26,22 +23,45 @@ class Solution:
             t = 1
             for _ in range(k):
                 t = t*x
-        # print('t', t)
         
         if temp_k < 0:
             t = 1/t
-        # print('t', t)
         v = t
-        # print(i)
-        # if i == 0:
-        #     v = 1
-        # else:
         for _ in range(i):
             v = v*v
-        
-        
         return v
+
+    def myPow(self, x, n):
+        # write your code here
+        if n == 0:
+            return 1
+        binary = []
+        negitive = 0
+        if n < 0:
+            negitive = -1
+            if n < -100:
+                return 0.00
+            n = -n
+        v = n
+        while v != 0:
+            binary.append(v % 2)
+            v = v // 2
+        
+        bin_v = [x]
+        t = x
+        for _ in range(len(binary)-1):
+            t = t * t
+            bin_v.append(t)
+        outcome = 1
+        for i in range(len(binary)):
+            temp = binary[i] * bin_v[i]
+            if temp == 0:
+                temp = 1
+            outcome = outcome * temp
+        if negitive == -1:
+            outcome = 1/outcome
+        return outcome
 
 
 if __name__ == "__main__":
-    print(Solution().myPow(8.84372,-5))
+    print(Solution().myPow(2,-100))
