@@ -14,10 +14,10 @@ class Solution:
                 if len(word_set) == 1:
                     i = i - 1
                     out = word_set.pop()
-                    abbr_out = out[0:i+1]+str(l-i-2)+out[-1],out
-                    if len(abbr_out[0]) == len(abbr_out[1]):
-                        abbr_out[0] = abbr_out[1]
-                    output.append(abbr)
+                    _abbr_out = [out[0:i+1]+str(l-i-2)+out[-1],out]
+                    if len(_abbr_out[0]) == len(_abbr_out[1]):
+                        _abbr_out[0] = _abbr_out[1]
+                    output.append(_abbr_out)
                     break
                 out_set = set()
                 for w in word_set:
@@ -32,17 +32,21 @@ class Solution:
                         abbr_out = [out[0:i+1]+str(l-i-2)+out[-1],out]
                         if len(abbr_out[0]) == len(abbr_out[1]):
                             abbr_out[0] = abbr_out[1]
-                        output.append(abbr)
+                        output.append(abbr_out)
                     else:
                         out_set = trans_abbr(out_set)
                         for o in out_set:
                             output.append(o)
+            if len(word_set) != 0:
+                for w in word_set:
+                    output.append([w,w])
+                #  output.append(abbr_out)
             return output
 
 
 
 
-
+        # return trans_abbr(dict)
         abbr_dict = {}
         for word in dict:
             if len(word) <= 3:
@@ -62,17 +66,11 @@ class Solution:
             if len(abbr_dict[abbr]) > 1:
                 # word_list = abbr_dict[abbr]
                 abbr_list = trans_abbr(abbr_dict[abbr])
+                # print(abbr_list)
                 
                 for k in abbr_list:
                     new_abbr.append(k)
-                    # a = k[0]
-                    # w = k[1]
-                    # abbr_dict[a] = {w}
                 trash.append(abbr)
-                # del abbr_dict[abbr]
-                # l = int(abbr[1]) + 2
-                # for i in range(1,l):
-                #     for word in word_set:
         for t in trash:
             del abbr_dict[t]
         for k in new_abbr:
@@ -80,7 +78,7 @@ class Solution:
             w = k[1]
             abbr_dict[a] = {w}
         outcome_dict = {}
-        print(abbr_dict)
+        # print(abbr_dict)
         for abbr in abbr_dict:
             outcome_dict[list(abbr_dict[abbr])[0]] = abbr
         outcome = []
@@ -89,5 +87,6 @@ class Solution:
         return outcome
 
 if __name__ == "__main__":
-    # print(Solution().wordsAbbreviation(["like","god","internal","me","internet","interval","intension","face","intrusion"]))
-    print(Solution().wordsAbbreviation(["where","there","is","beautiful","way"]))
+    # print(Solution().wordsAbbreviation({"internal","internet","interval"}))
+    print(Solution().wordsAbbreviation(["like","god","internal","me","internet","interval","intension","face","intrusion"]))
+    # print(Solution().wordsAbbreviation(["where","there","is","beautiful","way"]))
