@@ -43,9 +43,6 @@ class Solution:
                 #  output.append(abbr_out)
             return output
 
-
-
-
         # return trans_abbr(dict)
         abbr_dict = {}
         for word in dict:
@@ -64,10 +61,8 @@ class Solution:
         new_abbr = []
         for abbr in abbr_dict:
             if len(abbr_dict[abbr]) > 1:
-                # word_list = abbr_dict[abbr]
                 abbr_list = trans_abbr(abbr_dict[abbr])
                 # print(abbr_list)
-                
                 for k in abbr_list:
                     new_abbr.append(k)
                 trash.append(abbr)
