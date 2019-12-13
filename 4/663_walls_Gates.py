@@ -47,14 +47,8 @@ class Solution:
         n = len(rooms)
         m = len(rooms[0])
         outcome = copy.deepcopy(rooms)
-        # outcome = []
-        # for r in rooms:
-        #     temp = []
-        #     for c in r:
-        #         temp.append(c)
-        #     outcome.append(temp)
 
-        # entry = 1
+
         for i in range(n):
             for j in range(m):
                 if rooms[i][j] == 2147483647:
