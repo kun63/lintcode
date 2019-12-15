@@ -99,8 +99,8 @@ def __wallsAndGates(self, rooms):
     m = len(rooms)
     n = len(rooms[0])
     
-    import Queue
-    queue = Queue.Queue()
+    import queue
+    queue = queue.Queue()
     
     directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
     
