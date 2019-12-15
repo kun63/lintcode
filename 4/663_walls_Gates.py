@@ -5,7 +5,7 @@ class Solution:
     @param rooms: m x n 2D grid
     @return: nothing
     """
-    def wallsAndGates(self, rooms):
+    def _wallsAndGates(self, rooms):
         # write your code here
         def find_dis(i,j,entry,visited):
             # print(i,j)
@@ -63,9 +63,63 @@ class Solution:
                     rooms[i][j] = outcome[i][j]
         return
 
+
+    def wallsAndGates(self, rooms):
+        # write your code here
+        def spread(i,j,v):
+            if rooms[i][j] <= v:
+                return
+            else:
+                rooms[i][j] = v + 1
+                p = [(i-1,j),(i+1,j),(i,j-1),(i,j+1)]
+                for a,b in p:
+                    # print(a,b)
+                    if a>=0 and a<=m-1 and b>=0 and b<=n-1:
+                        spread(a,b,v+1)
+        m = len(rooms)
+        n = len(rooms[0])
+        start = [(i,j) for i in range(m) for j in range(n) if rooms[i][j] == 0]
+        for i, j in start:
+            spread(i,j,-1)
+
+
 if __name__ == "__main__":
-    # x = [[2147483647,-1,0,2147483647],[2147483647,2147483647,2147483647,-1],[2147483647,-1,2147483647,-1],[0,-1,2147483647,2147483647]]
-    x = [[2147483647,2147483647,0,2147483647],[2147483647,2147483647,2147483647,2147483647]]
+    x = [[2147483647,2147483647,0,2147483647],[2147483647,2147483647,2147483647,-1],[2147483647,-1,2147483647,-1],[0,-1,2147483647,2147483647]]
+    # x = [[2147483647,2147483647,0,2147483647],[2147483647,2147483647,2147483647,2147483647]]
     Solution().wallsAndGates(x)
     for r in x:
         print(r)
+
+
+def __wallsAndGates(self, rooms):
+    # write your code here
+    if len(rooms) == 0 or len(rooms[0]) == 0:
+        return rooms
+        
+    m = len(rooms)
+    n = len(rooms[0])
+    
+    import Queue
+    queue = Queue.Queue()
+    
+    directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    
+    for i in range(m):
+        for j in range(n):
+            if rooms[i][j] == 0:
+                queue.put((i, j))
+                
+    while not queue.empty():
+        x, y = queue.get()
+        
+        for dx, dy in directions:
+            new_x = x + dx
+            new_y = y + dy
+            
+            if new_x < 0 or new_x >= m or new_y < 0 or new_y >= n or rooms[new_x][new_y] < rooms[x][y] + 1:
+                continue
+            
+            rooms[new_x][new_y] = rooms[x][y] + 1
+            queue.put((new_x, new_y))
+            
+    return rooms
