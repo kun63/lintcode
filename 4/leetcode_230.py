@@ -35,12 +35,16 @@ class Solution:
                 root = root.left
             root = s.pop()
             sort_list.append(root.val)
+            k -= 1
+            if not k:
+                return root.val
             root = root.right
-            if not s:
-                if root:
-                    sort_list.append(root.val)
-                break
-        return sort_list[k-1]
+            root = root.right
+        #     if not s:
+        #         if root:
+        #             sort_list.append(root.val)
+        #         break
+        # return sort_list[k-1]
 
         
 
