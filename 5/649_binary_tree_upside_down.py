@@ -26,7 +26,8 @@ class Solution:
                 self.new_root.append(leaf)
                 return leaf
             curr_left = helper(root.left)
-            curr_left.left = helper(root.right)
+            # curr_left.left = helper(root.right)
+            curr_left.left = root.right
             curr_left.right = TreeNode(root.val)
             self.new_root.append(curr_left)
             return curr_left.right
