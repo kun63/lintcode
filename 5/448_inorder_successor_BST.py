@@ -18,7 +18,7 @@ class Solution:
     @param: p: You need find the successor node of p.
     @return: Successor of p.
     """
-    def inorderSuccessor(self, root, p):
+    def _inorderSuccessor(self, root, p):
         # write your code here
         def inorder(root):
             if root == None:
@@ -30,9 +30,27 @@ class Solution:
         self.succ = None
         inorder(root)
         return self.succ
+    def inorderSuccessor(self, root, p):
+        succ = None
+        parent = None
+        while True:
+            
+            if root.val == p:
+                if root.right:
+                    succ = root.right
+                    break
+                else:
+                    succ = parent
+            elif root.val > p:
+                parent = root
+                root = root.left
+            else:
+                parent = root
+                root = root.right
+        return succ
 
 if __name__ == "__main__":
     root = TreeNode(1)
     # root.left = TreeNode(2)
     root.right = TreeNode(2)
-    print(Solution().inorderSuccessor(root,1))
+    print(Solution().inorderSuccessor(root,1).val)
