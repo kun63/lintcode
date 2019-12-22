@@ -24,8 +24,8 @@ class Solution:
             if root == None:
                 return
             inorder(root.left)
-            if root.val > p and self.succ == None:
-                self.succ = root.val
+            if root.val > p.val and self.succ == None:
+                self.succ = root
             inorder(root.right)
         self.succ = None
         inorder(root)

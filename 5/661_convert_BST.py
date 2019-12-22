@@ -16,7 +16,7 @@ class Solution:
     @param root: the root of binary tree
     @return: the new root
     """
-    def convertBST(self, root):
+    def _convertBST(self, root):
         # write your code here
         
         def flat_tree(root):
@@ -59,6 +59,19 @@ class Solution:
         unflat_tree(root)
         # change_val(root)
         return root
+
+    def convertBST(self, root):
+        self.sum = 0
+        def helper(root):
+            if root == None:
+                return None
+            helper(root.right)
+            self.sum += root.val
+            root.val = self.sum
+            helper(root.left)
+        helper(root)
+        return root
+
         
 if __name__ == "__main__":
     root = TreeNode(5)
