@@ -60,7 +60,7 @@ class Solution:
         # change_val(root)
         return root
 
-    def convertBST(self, root):
+    def __convertBST(self, root):
         self.sum = 0
         def helper(root):
             if root == None:
@@ -71,6 +71,19 @@ class Solution:
             helper(root.left)
         helper(root)
         return root
+    def convertBST(self, root):
+        import collections
+        q = collections.deque([root])
+        while q:
+            
+            print(root.val)
+            root = q.pop()
+            while root.right:
+                q.append(root.right)
+                root = root.right
+            if root.left:
+                root = root.left
+        
 
         
 if __name__ == "__main__":
@@ -78,6 +91,6 @@ if __name__ == "__main__":
     root.left = TreeNode(2)
     root.right = TreeNode(13)
     Solution().convertBST(root)
-    print(root.val)
+    # print(root.val)
 
     
