@@ -7,6 +7,7 @@ class Solution:
         # write your code here
         self.factor = [2,3,5,7]
         self.outcome = []
+        self.flag = 0
         def gen_factor(n):
             local_factor = []
             pre = []
@@ -46,26 +47,38 @@ class Solution:
             #                 n = n/t
             #             if n == 1 or n < t:
             #                 break
+            
             local_list = []
             # for k in range(low,local_n+1):
-            for k in range(low,local_n+1):
+            if local_n<=3:
+                return [[local_n]]
+            # for k in range(low,local_n+1):
+            for k in range(low,int(round(local_n**(1/2))+1)):
+                # if floor == 0 and k > int(round(local_n**(1/2))+1):
+                #     # print(k,int(round(local_n**(1/2))+1))
+                #     # self.flag = 1
+                #     break
 
-                pre = []
-                n = local_n
-                if k>100 and k > local_n**(1/2)+1:
-                    print(k,local_n,local_n**(1/2)+1)
-                    break
                 
-                if n == k:
+                # n = local_n
+                
+                
+                if local_n == k:
+                    print(k)
                     local_list.append([k])
                     break
-                if k > n / k:
-                    continue
-                if n % k == 0:
-                    temp = gen_factor_list(int(n/k),k)
+                # if k > local_n**(1/2)+1:
+                #     print(k,local_n,local_n**(1/2)+1)
+                #     print(local_list)
+                #     break
+                
+                if local_n % k == 0:
+                    
+                    temp = gen_factor_list(int(local_n/k),k)
                     for t in temp:
                         local_list.append([k]+t)
-                
+            # print(local_list)
+            local_list.append([local_n])
             return local_list
                     # for t in range(k,local_n):
                         
@@ -78,9 +91,11 @@ class Solution:
 
 
         self.outcome = gen_factor_list(n,2)
-        if self.outcome:
-            self.outcome.pop()
+        # print(self.outcome)
+        # if self.outcome:
+        #     self.outcome.pop()
         return self.outcome
 
 if __name__ == "__main__":
+    # print(Solution().getFactors(6718464))
     print(Solution().getFactors(12))
