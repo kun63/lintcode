@@ -16,12 +16,24 @@ class Solution:
         def helper(root):
             if root == None:
                 return 0
+            # if root.left == None and root.right == None:
+            #     return root.val
             left = helper(root.left)
             right = helper(root.right)
             local_max = root.val + left + right
-            if local_max > self.max_root.val:
+            # if self.max_root == None:
+            #     self.max_root = root
+            if local_max > self.max_v:
                 self.max_root = root
+                self.max_v = local_max
             return local_max
-        self.max_root = root
+        if root == None:
+            return None
+        self.max_root = None
+        import math
+        self.max_v = -math.inf
         helper(root)
+        print(self.max_root.val)
         return self.max_root
+        
+        
