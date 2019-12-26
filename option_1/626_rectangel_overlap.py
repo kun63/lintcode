@@ -18,10 +18,10 @@ class Solution:
 
     def doOverlap(self, l1, r1, l2, r2):
         (_, a), (b, _) = sorted([sorted([l1.x,r1.x]), sorted([l2.x, r2.x)]])
-        print(a,b)
+        # print(a,b)
         if a >= b:
             (_, a), (b, _) = sorted([sorted([l1.y,r1.y]), sorted([l2.y, r2.y)]])
-            print(a,b)
+            # print(a,b)
             if a >= b:
                 return True
 
