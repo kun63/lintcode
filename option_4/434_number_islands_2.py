@@ -21,9 +21,15 @@ class Solution:
                 self.point[point] = point
                 self.num_islands += 1
                 return point
-            if self.point[point] != point:
-                self.point[point] = find(self.point[point])
-            return self.point[point]
+            # if self.point[point] != point:
+            #     self.point[point] = find(self.point[point])
+            path = []
+            while self.point[point] != point:
+                path.append(point)
+                point = self.point[point]
+            for p in path:
+                self.point[p] = point
+            return point
         
         def union(c):
             point_1, point_2 = c
