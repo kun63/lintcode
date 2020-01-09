@@ -23,6 +23,14 @@ class Solution:
             #     return 0
             return '0'
         return outcome
+    def _largestNumber(self, nums):
+        if not nums:
+            return ""
+        nums.sort(key = cmp_to_key(lambda a, b: \
+        1 if str(a) + str(b) < str(b) + str(a) else -1))
+        if nums[0] == 0:
+            return '0'
+        return "".join([str(num) for num in nums])
 
 if __name__ == "__main__":
     print(Solution().largestNumber([1, 20, 23, 4, 8]))
