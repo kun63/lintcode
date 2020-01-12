@@ -10,7 +10,7 @@ class Solution:
     @param n: An integer
     @return: An integer which is the first bad version.
     """
-    def findFirstBadVersion(self, n):
+    def _findFirstBadVersion(self, n):
         # write your code here
         start = 1
         end = n
@@ -33,3 +33,15 @@ class Solution:
                 return max([pre_number,integer])
             pre = curr
             pre_number = integer 
+    
+    def findFirstBadVersion(self, n):
+        l, r = 1, n
+        while l + 1 < r:
+            mid = (l + r) // 2
+            if SVNRepo.isBadVersion(mid):
+                r = mid
+            else:
+                l = mid
+        if SVNRepo.isBadVersion(l):
+            return l
+        return r
